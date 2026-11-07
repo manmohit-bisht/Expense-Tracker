@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "ID": 1,
+    "Amount": 50,
+    "Category": "FJA",
+    "Description": "FKAL",
+    "Date": "2025-12-12"
+  },
+  {
+    "ID": 2,
+    "Amount": 500,
+    "Category": "fdjf",
+    "Description": "fajf",
+    "Date": "2025-12-12"
+  },
+  {
+    "ID": 3,
+    "Amount": 32937,
+    "Category": "fjafa",
+    "Description": "fafa",
+    "Date": "2025-12-12"
+  }
+]
