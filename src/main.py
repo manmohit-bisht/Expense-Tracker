@@ -3,6 +3,7 @@ from datetime import date
 from datetime import datetime
 import os
 from pathlib import Path
+from tabulate import tabulate
 
 BASE_DIR = Path(__file__).resolve().parent
 FILE_PATH = BASE_DIR / "expense.json"
@@ -56,8 +57,40 @@ def add_expense():
 
 
 def view_expense():
-    pass
+    if not FILE_PATH.exists():
+        print("No expenses found.")
+        return
+
+    with open(FILE_PATH, "r") as file:
+        expense_list = json.load(file)
+
+    if not expense_list:
+        print("No expenses found.")
+        return
+
+    headers = ["ID", "Amount", "Category", "Description", "Date"]
+    rows = []
+    # rows is just a 2d list that will hold all the expenses in a tabular format
+    for expense in expense_list:
+        rows.append(
+            [
+                expense["ID"],
+                expense["Amount"],
+                expense["Category"],
+                expense["Description"],
+                expense["Date"],
+            ]
+        )
+    print(
+        tabulate(
+            rows,
+            headers=headers,
+            tablefmt="rounded_grid",
+            maxcolwidths=[5, 10, 15, 25, 12],
+        )
+    )
 
 
-for i in range(3):
-    add_expense()
+view_expense()
+# for i in range(3):
+#     add_expense()
