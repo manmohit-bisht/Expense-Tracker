@@ -1,7 +1,5 @@
 import json
-from datetime import date
 from datetime import datetime
-import os
 from pathlib import Path
 from tabulate import tabulate
 
