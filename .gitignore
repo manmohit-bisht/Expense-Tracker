@@ -1,2 +1,7 @@
 .venv/
 expense.json
+exptracker.egg-info/
+__pycache__/
+*.pyc
+dist/
+build/

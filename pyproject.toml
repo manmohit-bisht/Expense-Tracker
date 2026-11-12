@@ -6,12 +6,12 @@ build-backend = "setuptools.build_meta"
 name = "exptracker"
 version = "0.1.0"
 description = "A command-line expense tracker tool"
-readme = "README.md"
 requires-python = ">=3.8"
 dependencies = []
 
 [project.scripts]
-exptracker = "src.main:main"
+exptracker = "main:main"
 
 [tool.setuptools]
-py-modules = ["src.main"]
+package-dir = {"" = "src"}
+py-modules = ["main"]
