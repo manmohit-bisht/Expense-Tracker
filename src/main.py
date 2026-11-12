@@ -154,6 +154,47 @@ def update_expense():
     print(f"Expense with ID {expense_id} has been updated.")
 
 
+def delete_expense():
+    if not FILE_PATH.exists():
+        print("No expenses found.")
+        return
+
+    with open(FILE_PATH, "r") as file:
+        expense_list = json.load(file)
+
+    if not expense_list:
+        print("No expenses found.")
+        return
+
+    try:
+        expense_id = int(input("Enter the ID of the expense to delete: "))
+    except ValueError:
+        print("Invalid input! Please enter a valid integer ID.")
+        return
+
+    # Find the expense with the given ID
+    if expense_id > 1 and expense_id <= len(expense_list):
+        expense_to_delete = expense_list[expense_id - 1]
+    else:
+        expense_to_delete = None
+
+    if not expense_to_delete:
+        print(f"No expense found with ID {expense_id}.")
+        return
+
+    # Remove the expense from the list
+    expense_list.remove(expense_to_delete)
+
+    # upadte the IDs of the remaining expenses
+    for i in range(expense_id - 1, len(expense_list)):
+        expense_list[i]["ID"] -= 1
+    # Write updated expenses back to the file
+    with open(FILE_PATH, "w") as file:
+        json.dump(expense_list, file, indent=2)
+
+    print(f"Expense with ID {expense_id} has been deleted.")
+
+
 view_expense()
-update_expense()
+delete_expense()
 view_expense()
