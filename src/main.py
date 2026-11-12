@@ -195,7 +195,7 @@ def delete_expense():
     print(f"Expense with ID {expense_id} has been deleted.")
 
 
-if __name__ == "__main__":
+def main():
     while True:
         print("\nExpense Tracker Menu:")
         print("1. Add Expense")
@@ -219,3 +219,7 @@ if __name__ == "__main__":
             break
         else:
             print("Invalid choice! Please enter a number between 1 and 5.")
+
+
+if __name__ == "__main__":
+    main()
