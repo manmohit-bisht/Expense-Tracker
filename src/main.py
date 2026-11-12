@@ -89,6 +89,71 @@ def view_expense():
     )
 
 
+def update_expense():
+    if not FILE_PATH.exists():
+        print("No expenses found.")
+        return
+
+    with open(FILE_PATH, "r") as file:
+        expense_list = json.load(file)
+
+    if not expense_list:
+        print("No expenses found.")
+        return
+
+    try:
+        expense_id = int(input("Enter the ID of the expense to update: "))
+    except ValueError:
+        print("Invalid input! Please enter a valid integer ID.")
+        return
+
+    # Find the expense with the given ID
+    if expense_id > 1 and expense_id <= len(expense_list):
+        expense_to_update = expense_list[expense_id - 1]
+    else:
+        expense_to_update = None
+
+    if not expense_to_update:
+        print(f"No expense found with ID {expense_id}.")
+        return
+
+    # Prompt user for new values (press Enter to keep current value)
+    new_amount = input(f"New Amount (current: {expense_to_update['Amount']}): ")
+    new_category = input(f"New Category (current: {expense_to_update['Category']}): ")
+    new_description = input(
+        f"New Description (current: {expense_to_update['Description']}): "
+    )
+    new_date_string = input(
+        f"New Date (current: {expense_to_update['Date']}, format DD-MM-YYYY): "
+    )
+
+    # Update values if provided
+    if new_amount:
+        try:
+            expense_to_update["Amount"] = int(new_amount)
+        except ValueError:
+            print("Invalid amount! Keeping current value.")
+
+    if new_category:
+        expense_to_update["Category"] = new_category
+
+    if new_description:
+        expense_to_update["Description"] = new_description
+
+    if new_date_string:
+        try:
+            dt_object = datetime.strptime(new_date_string, "%d-%m-%Y")
+            expense_to_update["Date"] = str(dt_object.date())
+        except ValueError:
+            print("Invalid date format! Keeping current value.")
+
+    # Write updated expenses back to the file
+    with open(FILE_PATH, "w") as file:
+        json.dump(expense_list, file, indent=2)
+
+    print(f"Expense with ID {expense_id} has been updated.")
+
+
 view_expense()
-# for i in range(3):
-#     add_expense()
+update_expense()
+view_expense()
