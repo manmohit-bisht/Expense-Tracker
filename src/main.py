@@ -195,6 +195,27 @@ def delete_expense():
     print(f"Expense with ID {expense_id} has been deleted.")
 
 
-view_expense()
-delete_expense()
-view_expense()
+if __name__ == "__main__":
+    while True:
+        print("\nExpense Tracker Menu:")
+        print("1. Add Expense")
+        print("2. View Expenses")
+        print("3. Update Expense")
+        print("4. Delete Expense")
+        print("5. Exit")
+
+        choice = input("Enter your choice (1-5): ")
+
+        if choice == "1":
+            add_expense()
+        elif choice == "2":
+            view_expense()
+        elif choice == "3":
+            update_expense()
+        elif choice == "4":
+            delete_expense()
+        elif choice == "5":
+            print("Exiting the program.")
+            break
+        else:
+            print("Invalid choice! Please enter a number between 1 and 5.")
